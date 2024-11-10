@@ -15,15 +15,15 @@ models = [
 
 
 
-openai_base_url = st.text_input("OpenAI Base Url", value="https://taras-free_open_router.web.val.run/api/v1")
+openai_base_url = st.sidebar.text_input("OpenAI Base Url", value="https://taras-free_open_router.web.val.run/api/v1")
 openai_model = st.sidebar.selectbox("OpenAI Model", models, index=0)
 
 # Ask user for their OpenAI API key via `st.text_input`.
 # Alternatively, you can store the API key in `./.streamlit/secrets.toml` and access it
 # via `st.secrets`, see https://docs.streamlit.io/develop/concepts/connections/secrets-management
-openai_api_key = st.text_input("OpenAI API Key", value="mock_key")
+openai_api_key = st.sidebar.text_input("OpenAI API Key", value="mock_key")
 if not openai_api_key:
-    st.info("Please add your OpenAI API key to continue.", icon="🗝️")
+    st.sidebar.info("Please add your OpenAI API key to continue.", icon="🗝️")
 else:
 
     # Create an OpenAI client.
