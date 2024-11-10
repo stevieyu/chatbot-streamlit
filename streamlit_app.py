@@ -31,6 +31,8 @@ else:
         base_url=openai_base_url
     )
 
+    models = [model.id for model in client.models.list().data]
+
     openai_model = st.sidebar.selectbox("OpenAI Model", models, index=0)
 
     # Create a session state variable to store the chat messages. This ensures that the
