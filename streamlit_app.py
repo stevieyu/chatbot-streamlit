@@ -16,7 +16,6 @@ models = [
 
 
 openai_base_url = st.sidebar.text_input("OpenAI Base Url", value="https://taras-free_open_router.web.val.run/api/v1")
-openai_model = st.sidebar.selectbox("OpenAI Model", models, index=0)
 
 # Ask user for their OpenAI API key via `st.text_input`.
 # Alternatively, you can store the API key in `./.streamlit/secrets.toml` and access it
@@ -31,6 +30,8 @@ else:
         api_key=openai_api_key,
         base_url=openai_base_url
     )
+
+    openai_model = st.sidebar.selectbox("OpenAI Model", models, index=0)
 
     # Create a session state variable to store the chat messages. This ensures that the
     # messages persist across reruns.
