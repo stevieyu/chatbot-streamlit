@@ -9,8 +9,14 @@ st.write(
     "You can also learn how to build this app step by step by [following our tutorial](https://docs.streamlit.io/develop/tutorials/llms/build-conversational-apps)."
 )
 
+models = [
+    "groq/llama-3.1-8b-instant",
+]
+
+
+
 openai_base_url = st.text_input("OpenAI Base Url", value="https://taras-free_open_router.web.val.run/api/v1")
-openai_model = st.text_input("OpenAI Model", value="groq/llama-3.1-8b-instant")
+openai_model = st.sidebar.selectbox("OpenAI Model", models, index=0)
 
 # Ask user for their OpenAI API key via `st.text_input`.
 # Alternatively, you can store the API key in `./.streamlit/secrets.toml` and access it
