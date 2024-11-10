@@ -9,16 +9,22 @@ st.write(
     "You can also learn how to build this app step by step by [following our tutorial](https://docs.streamlit.io/develop/tutorials/llms/build-conversational-apps)."
 )
 
+openai_base_url = st.text_input("OpenAI Base Url", value="https://taras-free_open_router.web.val.run/api/v1")
+openai_model = st.text_input("OpenAI Model", value="groq/llama-3.1-8b-instant")
+
 # Ask user for their OpenAI API key via `st.text_input`.
 # Alternatively, you can store the API key in `./.streamlit/secrets.toml` and access it
 # via `st.secrets`, see https://docs.streamlit.io/develop/concepts/connections/secrets-management
-openai_api_key = st.text_input("OpenAI API Key", type="password")
+openai_api_key = st.text_input("OpenAI API Key", value="mock_key")
 if not openai_api_key:
     st.info("Please add your OpenAI API key to continue.", icon="🗝️")
 else:
 
     # Create an OpenAI client.
-    client = OpenAI(api_key=openai_api_key)
+    client = OpenAI(
+        api_key=openai_api_key,
+        base_url=openai_base_url
+    )
 
     # Create a session state variable to store the chat messages. This ensures that the
     # messages persist across reruns.
@@ -41,7 +47,7 @@ else:
 
         # Generate a response using the OpenAI API.
         stream = client.chat.completions.create(
-            model="gpt-3.5-turbo",
+            model=openai_model,
             messages=[
                 {"role": m["role"], "content": m["content"]}
                 for m in st.session_state.messages
