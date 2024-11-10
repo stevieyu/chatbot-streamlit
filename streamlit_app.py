@@ -26,14 +26,13 @@ if not openai_api_key:
 else:
 
     # Create an OpenAI client.
-    client = OpenAI(
-        api_key=openai_api_key,
-        base_url=openai_base_url
-    )
+    OpenAI.api_base = openai_base_url
+    OpenAI.api_key = openai_api_key
 
-    # client.m
+    models = openai.Model.list()
+    model_names = [model['id'] for model in models['data']]
 
-    openai_model = st.sidebar.selectbox("OpenAI Model", models, index=0)
+    openai_model = st.sidebar.selectbox("OpenAI Model", model_names, index=0)
 
     # Create a session state variable to store the chat messages. This ensures that the
     # messages persist across reruns.
