@@ -54,7 +54,7 @@ else:
             st.markdown(prompt)
 
         # Generate a response using the OpenAI API.
-        stream = client.chat.completions.create(
+        stream = OpenAI.chat.completions.create(
             model=openai_model,
             messages=[
                 {"role": m["role"], "content": m["content"]}
